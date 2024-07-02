@@ -15,10 +15,10 @@ class AddProductPage extends StatefulWidget {
 class _AddProductPageState extends State<AddProductPage> {
   final _formKey = GlobalKey<FormState>();
   late String _name;
-  late double _price;
+  late int _price;
   late int _qty;
   late String _attr;
-  late double _weight;
+  late int _weight;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class _AddProductPageState extends State<AddProductPage> {
                
                 },
                 onSaved: (value) {
-                  _price = double.parse(value!);
+                  _price = int.parse(value!);
                 },
               ),
               TextFormField(
@@ -99,7 +99,7 @@ class _AddProductPageState extends State<AddProductPage> {
                   return null;
                 },
                 onSaved: (value) {
-                  _weight = double.parse(value!);
+                  _weight = int.parse(value!);
                 },
               ),
               SizedBox(height: 20),
@@ -109,7 +109,7 @@ class _AddProductPageState extends State<AddProductPage> {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     Product newProduct = Product(
-                      id: widget.product?.id ?? 0,
+                      id: widget.product!.id,
                       name: _name,
                       price: _price,
                       qty: _qty,

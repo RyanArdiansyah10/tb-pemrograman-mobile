@@ -17,7 +17,7 @@ class _AddStockPageState extends State<AddStockPage> {
   late String _name;
   late int _qty;
   late String _attr;
-  late double _weight;
+  late int _weight;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +83,7 @@ class _AddStockPageState extends State<AddStockPage> {
                   return null;
                 },
                 onSaved: (value) {
-                  _weight = double.parse(value!);
+                  _weight = int.parse(value!);
                 },
               ),
               SizedBox(height: 20),
@@ -93,7 +93,7 @@ class _AddStockPageState extends State<AddStockPage> {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     Stock newStock = Stock(
-                      id: widget.stock?.id ?? 0,
+                      id: widget.stock!.id,
                       name: _name,
                       qty: _qty,
                       attr: _attr,

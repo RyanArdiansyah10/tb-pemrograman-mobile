@@ -1,10 +1,10 @@
 class Product {
-  int id;
+  String id;
   String name;
-  double price;
+  int price;
   int qty;
   String attr;
-  double weight;
+  int weight;
 
   Product({
     required this.id,

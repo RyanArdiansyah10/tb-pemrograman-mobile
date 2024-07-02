@@ -1,5 +1,5 @@
 class Sales {
-  int id;
+  String id;
   String buyer;
   String phone;
   String date;
