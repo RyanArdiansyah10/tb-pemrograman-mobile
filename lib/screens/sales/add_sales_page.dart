@@ -91,7 +91,7 @@ class _AddSalesPageState extends State<AddSalesPage> {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     Sales newSales = Sales(
-                      id: widget.sales?.id ?? 0,
+                      id: widget.sales!.id,
                       buyer: _buyer,
                       phone: _phone,
                       date: _date,

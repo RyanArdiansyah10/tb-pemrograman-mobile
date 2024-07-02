@@ -4,7 +4,12 @@ import '../../providers/sales_provider.dart';
 import '../../models/sales.dart';
 import 'add_sales_page.dart';
 
-class SalesPage extends StatelessWidget {
+class SalesPage extends StatefulWidget {
+  @override
+  State<SalesPage> createState() => _SalesPageState();
+}
+
+class _SalesPageState extends State<SalesPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<SalesProvider>(context);
@@ -18,42 +23,46 @@ class SalesPage extends StatelessWidget {
           }
           if (snapshot.hasError) {
             return Center(child: Text('Error fetching sales'));
-          }
-          return ListView.builder(
-            padding: EdgeInsets.all(8.0),
-            itemCount: provider.sales.length,
-            itemBuilder: (context, index) {
-              Sales sales = provider.sales[index];
-              return Card(
-                color: Colors.red[50],
-                margin: EdgeInsets.symmetric(vertical: 8.0),
-                child: ListTile(
-                  title: Text(sales.buyer),
-                  subtitle: Text('Phone: ${sales.phone}, Date: ${sales.date}, Status: ${sales.status}'),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.edit, color: Colors.blue),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => AddSalesPage(sales: sales)),
-                          );
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.delete, color: Colors.red),
-                        onPressed: () {
-                          provider.deleteSales(sales.id);
-                        },
-                      ),
-                    ],
+          } else {
+            return ListView.builder(
+              padding: EdgeInsets.all(8.0),
+              itemCount: provider.sales.length,
+              itemBuilder: (context, index) {
+                Sales sales = provider.sales[index];
+                return Card(
+                  color: Colors.red[50],
+                  margin: EdgeInsets.symmetric(vertical: 8.0),
+                  child: ListTile(
+                    title: Text(sales.buyer),
+                    subtitle: Text(
+                        'Phone: ${sales.phone}, Date: ${sales.date}, Status: ${sales.status}'),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.edit, color: Colors.blue),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      AddSalesPage(sales: sales)),
+                            );
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete, color: Colors.red),
+                          onPressed: () {
+                            provider.deleteSales(sales.id as int);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              );
-            },
-          );
+                );
+              },
+            );
+          }
         },
       ),
       floatingActionButton: FloatingActionButton(

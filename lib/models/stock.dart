@@ -1,9 +1,9 @@
 class Stock {
-  int id;
+  String id;
   String name;
   int qty;
   String attr;
-  double weight;
+  int weight;
 
   Stock({
     required this.id,
